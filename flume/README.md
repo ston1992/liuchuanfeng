@@ -7,7 +7,7 @@ Flume是Cloudera提供的一个高可用、高可靠、分布式的海量日志�
 
 ​	Flume allows a user to build multi-hop flows where events travel through multiple agents before reaching the final destination. It also allows fan-in and fan-out flows, contextual routing and backup routes (fail-over) for failed hops.
 
-###Reliability:  
+#### Reliability:  
 
 The events are staged in a channel on each agent. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. Flume uses a transactional approach to guarantee the reliable delivery of the events. The sources and sinks encapsulate in a transaction the storage/retrieval, respectively, of the events placed in or provided by a transaction provided by the channel. This ensures that the set of events are reliably passed from point to point in the flow. In the case of a multi-hop flow, the sink from the previous hop and the source from the next hop both have their transactions running to ensure that the data is safely stored in the channel of the next hop.
 
@@ -32,11 +32,12 @@ $ bin/flume-ng agent -n $agent_name -c conf -f conf/flume-conf.properties.templa
 
 
 ### 典型场景
-
-
-
-
-
+multi-agent flow
+![multi-agent flow](https://github.com/ston1992/liuchuanfeng/blob/master/flume/pcture/multi-agent%20flow.png)
+consolidation
+![consolidation](https://github.com/ston1992/liuchuanfeng/blob/master/flume/pcture/consolidation.png)
+multiplexing flow
+![multiplexing flow](https://github.com/ston1992/liuchuanfeng/blob/master/flume/pcture/mutiplexing%20the%20flow.png)
 
 
 各种场景及source、channel、sink具体的配置方法见：
