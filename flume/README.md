@@ -2,11 +2,12 @@
 
 Flume是Cloudera提供的一个高可用、高可靠、分布式的海量日志采集、聚合和传输的系统。  简言之，就是收集、汇聚并且移动大量日志文件的开源框架。
 
-​	A Flume event is defined as a unit of data flow having a byte payload and an optional set of string attributes. A Flume agent is a (JVM) process that hosts the components through which events flow from an external source to the next destination (hop).@picture
+​	A Flume event is defined as a unit of data flow having a byte payload and an optional set of string attributes. A Flume agent is a (JVM) process that hosts the components through which events flow from an external source to the next destination (hop).
+![flume-agent](https://github.com/ston1992/liuchuanfeng/blob/master/flume/pcture/flume-agent.png)
 
 ​	Flume allows a user to build multi-hop flows where events travel through multiple agents before reaching the final destination. It also allows fan-in and fan-out flows, contextual routing and backup routes (fail-over) for failed hops.
 
-	### Reliability:  
+###Reliability:  
 
 The events are staged in a channel on each agent. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. Flume uses a transactional approach to guarantee the reliable delivery of the events. The sources and sinks encapsulate in a transaction the storage/retrieval, respectively, of the events placed in or provided by a transaction provided by the channel. This ensures that the set of events are reliably passed from point to point in the flow. In the case of a multi-hop flow, the sink from the previous hop and the source from the next hop both have their transactions running to ensure that the data is safely stored in the channel of the next hop.
 
