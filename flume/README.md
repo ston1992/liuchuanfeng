@@ -13,7 +13,12 @@ The events are staged in a channel on each agent. The events are removed from a
 
 ### Recoverability  
 
-The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.
+​	Flume 以Agent 为最小的独立运行单位。一个Agent 就是一个JVM。单Agent 由Source 、Sink 和Channel 三大组件构成。
+
+​	Source、Channel、Sink之间的关系：多个Source可以安全地写入到相同的Channel, 并且多个Sink可以从相同的Channel进行读取。可是一个Sink 只能从一个Channel 读取。如果多个Sink 从相同的Channel 读取，它可以保证只有一个Sink 将
+会从Channel 读取（和提交）一个指定特定的事件．【每个Sink只能从一个Channel获取数据，尽管多个Sink可以从同一个Channel获取数据。】。Sink 连续轮询各自的Channel 来读取和删除事件。Sink 将事件推送到下一阶段(RPC Sink 的情况下），或到最终目的地。一且在下一阶段或其目的地中数据是安全的，Sink通过事务提交通知Channel, 可以从Channel 中删除这些事件．	
+
+​	The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.
 
 ### 操作步骤
 
