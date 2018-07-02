@@ -104,3 +104,4 @@ http://flume.apache.org/FlumeUserGuide.html
 | org.apache.flume.serialization.EventSerializer$Builder | text                | org.apache.flume.serialization.BodyTextEventSerializer$Builder |
 | org.apache.flume.serialization.EventSerializer$Builder | avro_event          | org.apache.flume.serialization.FlumeEventAvroEventSerializer$Builder |
 | org.apache.flume.serialization.EventSerializer$Builder | –                   | org.example.MyEventSerializer$Builder    |
+
